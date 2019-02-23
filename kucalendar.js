@@ -73,7 +73,7 @@ const makeCalendar = (year, options = { filename: "", zipped: false }) => {
 				VEVENT += `CLASS:PUBLIC\n`;
 				VEVENT += `TRANSP:OPAQUE\n`;
 				VEVENT += `DTSTART:${startdate}\n`;
-				VEVENT += `DTEND:${enddate}\n`;
+				if (startdate != enddate) VEVENT += `DTEND:${enddate}\n`; // 당일 일정 START == END일때 12시로 시간설정됨. 따라서 DTEND를 추가하지 않음.
 				VEVENT += `SUMMARY:${summary}\n`;
 				VEVENT += `LOCATION:Konkuk University\n`;
 				VEVENT += `CREATED:${new Date().toISOString()}\n`;
@@ -98,4 +98,5 @@ const makeCalendar = (year, options = { filename: "", zipped: false }) => {
 	});
 };
 
+makeCalendar(2019);
 export default makeCalendar;
